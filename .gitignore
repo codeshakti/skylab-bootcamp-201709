@@ -2,4 +2,8 @@ lab
 .DS_Store
 .sass-cache
 .idea
+<<<<<<< HEAD
 stuff/jquery/challenges/beers-app-3/index.html
+=======
+node_modules
+>>>>>>> upstream/master
