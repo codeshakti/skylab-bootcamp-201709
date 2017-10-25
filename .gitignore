@@ -3,7 +3,13 @@ lab
 .sass-cache
 .idea
 <<<<<<< HEAD
+<<<<<<< HEAD
 stuff/jquery/challenges/beers-app-3/index.html
 =======
 node_modules
+>>>>>>> upstream/master
+=======
+node_modules
+big-file*.dat
+song*.mp3
 >>>>>>> upstream/master
