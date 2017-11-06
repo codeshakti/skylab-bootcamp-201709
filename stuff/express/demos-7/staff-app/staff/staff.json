@@ -1,0 +1,42 @@
+[
+    {
+        "id": 0,
+        "name": "Enric",
+        "surname": "Bertran"
+    },
+    {
+        "id": 1,
+        "name": "Gemma",
+        "surname": "Casanovas"
+    },
+    {
+        "id": 2,
+        "name": "Marc",
+        "surname": "Recasens"
+    },
+    {
+        "id": 3,
+        "name": "Miguel",
+        "surname": "Escolano"
+    },
+    {
+        "id": 4,
+        "name": "Pablo",
+        "surname": "Mangione"
+    },
+    {
+        "id": 5,
+        "name": "Pau",
+        "surname": "Sarobe"
+    },
+    {
+        "id": 6,
+        "name": "Sergi",
+        "surname": "Picazo"
+    },
+    {
+        "id": 7,
+        "name": "Victor",
+        "surname": "Malo"
+    }
+]
