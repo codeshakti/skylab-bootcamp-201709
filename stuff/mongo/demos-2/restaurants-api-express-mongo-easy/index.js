@@ -142,7 +142,7 @@ app.use('/api', router)
 require('mongodb').MongoClient.connect('mongodb://localhost:27017/test', (err, db) => {
     if (err) throw err
 
-    restaurantsData = new(require('./restaurants/RestaurantsData'))(db, 'restaurants')
+    restaurantsData = new(require('./restaurants/RestaurantsData'))(db)
 
     console.log('Starting Restaurants API...')
 
