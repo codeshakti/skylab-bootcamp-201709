@@ -1,13 +1,6 @@
+const Restaurant = require('./RestaurantModel')
+
 class RestaurantsData {
-    constructor(db, collection) {
-        this.db = db
-        this.collection = collection
-    }
-
-    _db() {
-        return this.db.collection(this.collection)
-    }
-
     _projection(show, hide) {
         let projection = {}
 
@@ -35,29 +28,24 @@ class RestaurantsData {
     }
 
     _query(validate, conditions, page, limit, show, hide, single) {
-        return new Promise((resolve, reject) => {
-            if (validate) validate()
+        return Promise.resolve()
+            .then(() => {
+                if (validate) validate()
 
-            this._validate(page, limit, show, hide)
+                this._validate(page, limit, show, hide)
 
-            if (single)
-                this._db()
-                .findOne(conditions, this._projection(show, hide), (err, docs) => {
-                    if (err) return reject(err)
+                const options = { limit, page }
 
-                    resolve(docs)
-                })
-            else
-                this._db()
-                .find(conditions, this._projection(show, hide))
-                .skip((page - 1) * limit)
-                .limit(limit)
-                .toArray((err, docs) => {
-                    if (err) return reject(err)
+                options.select = ''
 
-                    resolve(docs)
-                })
-        })
+                if (show) options.select += show.split(',').join(' ')
+
+                if (hide)
+                    options.select += ' ' + hide.split(',').map(field => `-${field}`).join(' ')
+
+                return single? Restaurant.findOne(conditions, options.select) : Restaurant.paginate(conditions, options)
+            })
+            .then(result => result)
     }
 
     list(page, limit, show, hide) {

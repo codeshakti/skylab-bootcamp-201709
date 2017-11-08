@@ -106,7 +106,7 @@ router.route('/restaurants/:id')
             .then(restaurants =>
                 res.json({
                     status: 'OK',
-                    message: 'restaurant retrieved by id successfully',
+                    message: 'restaurants listed by id successfully',
                     data: restaurants
                 }))
             .catch(err => {
@@ -139,20 +139,18 @@ router.route('/restaurants/:id/around/:km')
 
 app.use('/api', router)
 
-require('mongodb').MongoClient.connect('mongodb://localhost:27017/test', (err, db) => {
-    if (err) throw err
+const mongoose = require('mongoose')
+mongoose.Promise = global.Promise
+mongoose.connect('mongodb://localhost:27017/test', { useMongoClient: true })
 
-    restaurantsData = new(require('./restaurants/RestaurantsData'))(db, 'restaurants')
+restaurantsData = new(require('./restaurants/RestaurantsData'))
 
-    console.log('Starting Restaurants API...')
+console.log('Starting Restaurants API...')
 
-    app.listen(process.env.PORT, () => console.log(`Restaurants API is up on port ${process.env.PORT}`))
+app.listen(process.env.PORT, () => console.log(`Restaurants API is up on port ${process.env.PORT}`))
 
-    process.on('SIGINT', () => {
-        console.log('\nStopping Restaurants API...')
+process.on('SIGINT', () => {
+    console.log('\nStopping Restaurants API...')
 
-        if (db) db.close()
-
-        process.exit()
-    })
+    process.exit()
 })
