@@ -9,6 +9,22 @@ app.use(require('./cors'))
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 
+app.use((req, res, proceed) => {
+    const method = req.method
+
+    const auth = req.get('authorization') // APIKEY <adsfasdfasfas...>
+
+    let apikey
+
+    if (auth && ((apikey = auth.split(' ')).length === 2) && apikey[0] === 'APIKEY' && apikey[1] === process.env.API_KEY)
+        proceed()
+    else 
+        res.json({
+            status: 'KO',
+            message: 'Not authorized'
+        })
+})
+
 const tasksData = new(require('./tasks/TasksData'))
 
 const router = express.Router()
